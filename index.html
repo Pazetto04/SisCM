@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Mercadorias</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light p-4">
+
+  <div class="container">
+    <h1 class="text-info mb-4">Cadastro de Mercadorias</h1>
+
+    <!-- LOGIN -->
+    <div class="card bg-secondary mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Login</h5>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="username" placeholder="Usuário">
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="password" placeholder="Senha">
+        </div>
+        <button class="btn btn-success me-2" onclick="login()">Entrar</button>
+        <button class="btn btn-danger" onclick="logout()">Sair</button>
+        <p id="loginStatus" class="mt-3"></p>
+      </div>
+    </div>
+
+    <!-- PRODUTOS -->
+    <div class="card bg-secondary">
+      <div class="card-body">
+        <h5 class="card-title">Lista de Produtos</h5>
+        <div id="produtos" class="mb-4"></div>
+
+        <h6 class="text-light">Adicionar Produto</h6>
+        <div class="row g-2 mb-3">
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="novoNome" placeholder="Nome">
+          </div>
+          <div class="col-md-3">
+            <input type="number" class="form-control" id="novoPreco" placeholder="Preço" min="0" step="0.01">
+          </div>
+          <div class="col-md-3">
+            <input type="number" class="form-control" id="novaQuantidade" placeholder="Quantidade" min="0">
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary w-100" onclick="adicionarProduto()">Adicionar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isLoggedIn = false;
+
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        isLoggedIn = true;
+        document.getElementById('loginStatus').innerText = data.mensagem;
+        carregarProdutos();
+      })
+      .catch(() => alert("Erro no login"));
+    }
+
+    function logout() {
+      fetch('/logout', { method: 'POST' })
+      .then(res => res.json())
+      .then(data => {
+        isLoggedIn = false;
+        document.getElementById('loginStatus').innerText = data.mensagem;
+        carregarProdutos();
+      });
+    }
+
+    function carregarProdutos() {
+      fetch('/produtos')
+      .then(res => res.json())
+      .then(produtos => {
+        const container = document.getElementById('produtos');
+        container.innerHTML = '';
+        produtos.forEach(prod => {
+          const div = document.createElement('div');
+          div.className = 'border-bottom py-2';
+          div.innerHTML = `
+            <strong>${prod.nome}</strong> - R$${prod.preco.toFixed(2)}<br>
+            <small><strong>ID:</strong> ${prod.id} | <strong>Estoque:</strong> ${prod.quantidade}</small><br>
+            ${isLoggedIn ? `
+              <button class="btn btn-sm btn-danger me-2 mt-1" onclick="excluirProduto('${prod.id}')">Excluir</button>
+              <button class="btn btn-sm btn-warning mt-1" onclick="editarProduto('${prod.id}')">Editar</button>
+            ` : ''}
+          `;
+          container.appendChild(div);
+        });
+      });
+    }
+
+    function adicionarProduto() {
+      if (!isLoggedIn) return alert("Você precisa estar logado para adicionar.");
+
+      const nome = document.getElementById('novoNome').value;
+      const preco = parseFloat(document.getElementById('novoPreco').value);
+      const quantidade = parseInt(document.getElementById('novaQuantidade').value);
+
+      if (!nome || preco < 0 || quantidade < 0) {
+        alert("Preencha todos os campos corretamente. Nenhum valor pode ser negativo.");
+        return;
+      }
+
+      fetch('/produtos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, preco, quantidade })
+      })
+      .then(res => res.json())
+      .then(() => {
+        document.getElementById('novoNome').value = '';
+        document.getElementById('novoPreco').value = '';
+        document.getElementById('novaQuantidade').value = '';
+        carregarProdutos();
+      });
+    }
+
+    function excluirProduto(id) {
+      fetch(`/produtos/${id}`, {
+        method: 'DELETE'
+      })
+      .then(res => res.json())
+      .then(() => carregarProdutos());
+    }
+
+    function editarProduto(id) {
+      const novoNome = prompt("Novo nome:");
+      const novoPreco = parseFloat(prompt("Novo preço:"));
+      const novaQuantidade = parseInt(prompt("Nova quantidade:"));
+
+      if (!novoNome || novoPreco < 0 || novaQuantidade < 0) {
+        alert("Valores inválidos. Nenhum valor pode ser negativo.");
+        return;
+      }
+
+      fetch(`/produtos/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: novoNome,
+          preco: novoPreco,
+          quantidade: novaQuantidade
+        })
+      })
+      .then(res => res.json())
+      .then(() => carregarProdutos());
+    }
+
+    carregarProdutos();
+  </script>
+
+</body>
+</html>
