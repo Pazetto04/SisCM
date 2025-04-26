@@ -1,5 +1,5 @@
 # SisCM
-Project of Software Test discipline on Computing Science corse Brasília's Catholic University
+Project of Software Test discipline on Computing Science course at Brasilia's Catholic University
 MAKE SURE NODE.JS IS INSTALLED
 Tutorial below
 1: Create a folder called 'public' and put the archive 'index.html' inside it
