@@ -24,6 +24,8 @@ function authMiddleware(req, res, next) {
     next();
 }
 
+// Rotas
+
 // Login
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
@@ -86,7 +88,12 @@ app.delete('/produtos/:id', authMiddleware, (req, res) => {
     res.json({ mensagem: "Produto excluído com sucesso." });
 });
 
-// Start do servidor
-app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+// Só inicia o servidor se for chamado diretamente (não nos testes)
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando em http://localhost:${PORT}`);
+    });
+}
+
+// Exporta o app para os testes
+module.exports = app;
