@@ -4,30 +4,28 @@ Overview
 SisCM is a web-based inventory management application independently developed for the Software Testing discipline of the Computer Science program at the Catholic University of Brasília (UCB), Brazil.
 The project was created as an academic environment for studying, implementing, and evaluating software testing techniques through a functional web application.
 The primary objective was not to develop a production-ready inventory system, but to apply software testing concepts to a practical development scenario.
+## 🛠️ Technologies Used
 
-Technologies
-Frontend
-- HTML5
-- CSS3
-- Bootstrap
-- JavaScript
-Backend
-- Node.js
-- Express.js
-Testing
-- Automated testing
-- Supertest
-- Black-box testing
-- White-box testing
-- Unit testing
-Features
-The application provides the following functionalities:
-- Product registration
-- Product listing
-- Product editing
-- Product deletion
-- Basic login simulation
-- REST API communication between frontend and backend
+### 💻 Frontend
+- **HTML5** — Web page structure.
+- **JavaScript (Vanilla JS)** — Application logic and DOM manipulation.
+- **Bootstrap 5.3.3** — Responsive layout and interface components.
+
+### ⚙️ Backend
+- **Node.js** — JavaScript runtime environment.
+- **Express.js** — HTTP server and REST API development.
+- **Body-parser** — HTTP request body parsing.
+
+### 🧪 Software Testing
+- **Supertest** — Automated HTTP endpoint testing.
+- **Jest-style Test Suite** — Test organization, assertions, and execution structure.
+- **API & Integration Testing** — Validation of API endpoints and application behavior.
+
+### 🔍 Testing Methodologies
+- **Black-box Testing** — Functional validation based on inputs and expected outputs.
+- **White-box Testing** — Analysis of internal logic and execution paths.
+- **Unit Testing** — Verification of individual components of application logic.
+
 Software Testing
 The main purpose of SisCM was to explore different software testing approaches within a controlled academic environment.
 Black-Box Testing
