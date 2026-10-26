@@ -26,18 +26,18 @@ The primary objective was not to develop a production-ready inventory system, bu
 - **White-box Testing** — Analysis of internal logic and execution paths.
 - **Unit Testing** — Verification of individual components of application logic.
 
-Software Testing
+## Software Testing 
 The main purpose of SisCM was to explore different software testing approaches within a controlled academic environment.
-Black-Box Testing
+### Black-Box Testing
 Evaluation of system behavior through inputs and expected outputs, without requiring knowledge of the internal implementation.
-White-Box Testing
+### White-Box Testing
 Analysis of internal application logic, code structure, and execution paths to validate expected behavior.
-Unit Testing
+### Unit Testing
 Verification of individual units of application logic to identify defects and ensure correct behavior.
-Automated API Testing
+### Automated API Testing
 The project also uses Supertest to validate HTTP requests, responses, and API functionality.
-Installation and Setup
-Prerequisites
+## Installation and Setup
+### Prerequisites
 Make sure you have the following installed:
 - Node.js
 - npm
@@ -59,7 +59,7 @@ Open your browser and navigate to:
 http://localhost:3000
 
 The application should now be running locally.
-Project Scope and Limitations
+## Project Scope and Limitations
 Academic purposes only — not intended for production use.
 
 SisCM was developed specifically for software testing and educational purposes.
@@ -68,13 +68,11 @@ Data persistence: Product data is stored in memory. All registered information i
 Execution: The project is designed to run in a local development environment.
 These limitations reflect the project's educational scope.
 
-Academic Context
+## Academic Context
 - Institution: Catholic University of Brasília (UCB)
 - Degree: Computer Science
 - Discipline: Software Testing
 - Project type: Individual academic project
-Author
-Matheus Pazetto
-Computer Science Student
+Author: Matheus Pazetto - Computer Science Student
 
 Developed for educational purposes as part of the Software Testing discipline at the Catholic University of Brasília.
