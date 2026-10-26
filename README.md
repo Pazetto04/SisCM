@@ -1,4 +1,4 @@
-#SisCM — Inventory Management System
+# SisCM — Inventory Management System
 
 Overview
 SisCM is a web-based inventory management application independently developed for the Software Testing discipline of the Computer Science program at the Catholic University of Brasília (UCB), Brazil.
