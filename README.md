@@ -73,6 +73,6 @@ These limitations reflect the project's educational scope.
 - Degree: Computer Science
 - Discipline: Software Testing
 - Project type: Individual academic project
-Author: Matheus Pazetto - Computer Science Student
+### Author: Matheus Pazetto - Computer Science Student
 
 Developed for educational purposes as part of the Software Testing discipline at the Catholic University of Brasília.
